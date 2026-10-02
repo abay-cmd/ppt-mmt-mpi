@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model-Model MMT dalam Pendidikan Islam : Apple Keynote Experience</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Inter, Amiri, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Three.js for 3D Building and Airplane Orbit Simulation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', 'sans-serif'],
+            arabic: ['"Amiri"', 'serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            apple: {
+              black: '#000000',
+              canvas: '#060608',
+              surface: '#0d0d10',
+              card: 'rgba(20, 20, 24, 0.78)',
+              cardHover: 'rgba(32, 32, 38, 0.94)',
+              border: 'rgba(255, 255, 255, 0.08)',
+              borderStrong: 'rgba(255, 255, 255, 0.22)',
+              textPrimary: '#F5F5F7',
+              textSecondary: '#A1A1AA',
+              textMuted: '#71717A',
+              highlight: '#FFFFFF'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: #000000;
+      color: #F5F5F7;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* Ambient Atmospheric Glow */
+    .apple-glow {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(100px);
+      z-index: 0;
+      opacity: 0.16;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    .apple-glow-top {
+      width: 640px;
+      height: 640px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, rgba(160, 160, 185, 0.08) 45%, transparent 70%);
+      top: -15%;
+      left: 18%;
+    }
+
+    .apple-glow-bottom {
+      width: 560px;
+      height: 560px;
+      background: radial-gradient(circle, rgba(200, 200, 225, 0.14) 0%, rgba(80, 80, 100, 0.04) 50%, transparent 70%);
+      bottom: -15%;
+      right: 12%;
+    }
+
+    /* VARIATIF MOTION HOVER ENGINE (ZERO LAYOUT SHIFT) */
+    .anim-title {
+      display: inline-block;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                  text-shadow 0.22s ease,
+                  filter 0.22s ease;
+      will-change: transform, text-shadow;
+    }
+    .anim-title:hover {
+      transform: translate3d(0, -2px, 0);
+      text-shadow: 0 0 18px rgba(255, 255, 255, 0.5);
+      filter: brightness(1.15);
+    }
+
+    .anim-subtitle {
+      display: inline-block;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  letter-spacing 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  color 0.2s ease;
+      will-change: transform, letter-spacing;
+    }
+    .anim-subtitle:hover {
+      transform: translate3d(2px, 0, 0);
+      letter-spacing: 0.03em;
+      color: #FFFFFF !important;
+    }
+
+    .anim-paragraph {
+      position: relative;
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                  color 0.22s ease,
+                  background-color 0.22s ease;
+      border-radius: 8px;
+      padding: 2px 4px;
+      margin: -2px -4px;
+      will-change: transform;
+    }
+    .anim-paragraph:hover {
+      transform: translate3d(3px, 0, 0);
+      color: #FFFFFF !important;
+      background-color: rgba(255, 255, 255, 0.04);
+    }
+
+    .anim-card-a {
+      background: rgba(22, 22, 26, 0.74);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.22s ease,
+                  background-color 0.22s ease,
+                  box-shadow 0.22s ease;
+      will-change: transform, border-color, box-shadow;
+    }
+    .anim-card-a:hover {
+      transform: translate3d(0, -3px, 0);
+      border-color: rgba(255, 255, 255, 0.4);
+      background-color: rgba(30, 30, 36, 0.94);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.07);
+    }
+
+    .anim-card-b {
+      background: rgba(20, 20, 24, 0.7);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.22s ease,
+                  box-shadow 0.22s ease;
+      will-change: transform, border-color;
+    }
+    .anim-card-b:hover {
+      transform: translate3d(0, -2px, 0) scale(1.008);
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.75);
+    }
+
+    .anim-badge {
+      display: inline-flex;
+      align-items: center;
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.18s ease,
+                  border-color 0.18s ease,
+                  box-shadow 0.18s ease;
+      will-change: transform;
+    }
+    .anim-badge:hover {
+      transform: translate3d(0, -2px, 0) scale(1.03);
+      background-color: rgba(255, 255, 255, 0.16) !important;
+      border-color: rgba(255, 255, 255, 0.5) !important;
+      box-shadow: 0 4px 14px rgba(255, 255, 255, 0.2);
+    }
+
+    .anim-number {
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.18s ease,
+                  color 0.18s ease,
+                  box-shadow 0.18s ease;
+      will-change: transform;
+    }
+    .anim-number:hover {
+      transform: translate3d(0, -2px, 0) rotate(-3deg) scale(1.1);
+      background-color: #FFFFFF !important;
+      color: #000000 !important;
+      box-shadow: 0 0 14px rgba(255, 255, 255, 0.6);
+    }
+
+    .anim-list-item {
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+                  color 0.18s ease;
+      will-change: transform;
+    }
+    .anim-list-item:hover {
+      transform: translate3d(4px, 0, 0);
+      color: #FFFFFF !important;
+    }
+
+    /* Interactive Scientific Term Button with Citation Badge */
+    .term-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 1px 8px;
+      margin: 0 2px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      line-height: 1.35;
+      vertical-align: baseline;
+      transition: transform 0.16s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.16s ease,
+                  border-color 0.16s ease,
+                  box-shadow 0.16s ease;
+      will-change: transform;
+    }
+    .term-btn:hover {
+      transform: translate3d(0, -2px, 0) scale(1.04);
+      background: rgba(255, 255, 255, 0.26);
+      border-color: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 4px 16px rgba(255, 255, 255, 0.28);
+    }
+    .term-cite {
+      font-size: 0.68rem;
+      opacity: 0.75;
+      font-weight: 400;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    /* Ambient Continuous Looping Airplane Widget on Every Slide */
+    .plane-loop-capsule {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      color: #A1A1AA;
+    }
+
+    .plane-icon-flight {
+      animation: airplaneFlyLoop 2.4s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    @keyframes airplaneFlyLoop {
+      0% {
+        transform: translate3d(-3px, 1px, 0) rotate(-4deg);
+      }
+      50% {
+        transform: translate3d(3px, -2px, 0) rotate(4deg);
+      }
+      100% {
+        transform: translate3d(-3px, 1px, 0) rotate(-4deg);
+      }
+    }
+
+    .plane-radar-ring {
+      animation: radarPulse 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes radarPulse {
+      0% {
+        transform: scale(0.9);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1.8);
+        opacity: 0;
+      }
+    }
+
+    /* ZERO-DELAY HIGH-PERFORMANCE SLIDE VIEWPORT */
+    .slide-viewport {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .slide-view {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate3d(24px, 0, 0) scale(0.985);
+      transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                  visibility 0.22s;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 1rem 0;
+      will-change: opacity, transform, visibility;
+    }
+
+    .slide-view.active {
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      transform: translate3d(0, 0, 0) scale(1) !important;
+    }
+
+    .slide-view.exit-backward {
+      transform: translate3d(24px, 0, 0) scale(0.985);
+    }
+
+    .slide-view.exit-forward {
+      transform: translate3d(-24px, 0, 0) scale(0.985);
+    }
+
+    /* Fast pop card entrance */
+    .slide-view.active .motion-item {
+      animation: appleFastPop 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    .slide-view.active .motion-item:nth-child(1) { animation-delay: 0.02s; }
+    .slide-view.active .motion-item:nth-child(2) { animation-delay: 0.05s; }
+    .slide-view.active .motion-item:nth-child(3) { animation-delay: 0.08s; }
+    .slide-view.active .motion-item:nth-child(4) { animation-delay: 0.11s; }
+
+    @keyframes appleFastPop {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 10px, 0) scale(0.985);
+      }
+      100% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+    }
+
+    .text-apple-headline {
+      background: linear-gradient(180deg, #FFFFFF 30%, #A1A1AA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(18, 18, 21, 0.4);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+  </style>
+</head>
+
+<body class="relative flex flex-col justify-between font-sans bg-black selection:bg-white selection:text-black">
+  <!-- Ambient Atmospheric Lighting -->
+  <div class="apple-glow apple-glow-top"></div>
+  <div class="apple-glow apple-glow-bottom"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none z-0"></div>
+
+  <!-- Header: Apple Minimalist Top Bar -->
+  <header class="relative z-40 h-16 w-full border-b border-white/[0.08] bg-black/70 backdrop-blur-2xl px-6 flex items-center justify-between">
+    <div class="flex items-center space-x-3.5">
+      <div class="h-10 w-10 rounded-xl overflow-hidden flex items-center justify-center bg-white/5 border border-white/10 p-1 anim-badge shadow-sm">
+        <img 
+          src="logo-uin.png" 
+          alt="Logo UIN Sunan Gunung Djati Bandung" 
+          class="h-full w-full object-contain" 
+          onerror="if(this.src.indexOf('logo%20uin.png')===-1 && this.src.indexOf('logo uin.png')===-1){this.src='logo uin.png';}else if(this.src.indexOf('wikimedia')===-1){this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/UIN_Sunan_Gunung_Djati_logo.png/320px-UIN_Sunan_Gunung_Djati_logo.png';}else{this.onerror=null; this.parentElement.innerHTML='<span class=\'font-bold text-xs text-white\'>UIN</span>';}"
+        />
+      </div>
+      <div class="leading-tight">
+        <h1 class="text-xs font-semibold tracking-wider uppercase text-zinc-100 flex items-center space-x-1.5 anim-subtitle">
+          <span>UIN Sunan Gunung Djati Bandung</span>
+        </h1>
+        <p class="text-[11px] text-zinc-400 font-mono tracking-tight anim-paragraph">Kajian Manajemen Mutu Terpadu Pendidikan Islam</p>
+      </div>
+    </div>
+
+    <!-- Slide Timeline Indicator -->
+    <div class="flex items-center space-x-3">
+      <div class="flex items-center space-x-2.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 anim-badge">
+        <div class="w-20 md:w-32 h-1.5 bg-white/10 rounded-full overflow-hidden">
+          <div id="progressBar" class="h-full bg-white rounded-full transition-all duration-200 ease-out" style="width: 8.33%;"></div>
+        </div>
+        <span id="slideCounter" class="text-xs font-mono font-medium text-zinc-300">01 / 12</span>
+      </div>
+
+      <div class="h-4 w-[1px] bg-white/10 hidden sm:block"></div>
+
+      <button id="audioToggleBtn" onclick="toggleAudio()" class="px-3 py-1.5 text-xs rounded-xl border border-white/10 hover:border-white/30 text-zinc-400 hover:text-white transition flex items-center space-x-1.5 anim-badge" title="Efek Suara">
+        <span id="audioIndicator" class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+        <span id="audioText" class="hidden sm:inline">Suara</span>
+      </button>
+
+      <button onclick="toggleFullscreen()" class="px-3 py-1.5 text-xs rounded-xl border border-white/10 hover:border-white/30 text-zinc-400 hover:text-white transition hidden sm:flex items-center space-x-1 anim-badge" title="Layar Penuh">
+        <span>Layar Penuh</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="slideContainer" class="relative flex-1 w-full max-w-6xl mx-auto flex items-center justify-center p-4 sm:p-6 overflow-hidden z-10">
+    <div class="slide-viewport">
+
+      <!-- SLIDE 1: GERBANG PEMBUKA INTERAKTIF 3D -->
+      <section id="slide-1" class="slide-view active text-center max-w-5xl mx-auto space-y-5 my-auto">
+        <div class="flex items-center justify-center gap-3">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/15 text-xs font-mono font-medium text-zinc-300 motion-item anim-badge">
+            <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+            <span>HORIZON MUTU PERADABAN ISLAM</span>
+          </div>
+
+          <!-- Ambient Looping Airplane Widget -->
+          <div class="plane-loop-capsule anim-badge motion-item">
+            <div class="relative w-3.5 h-3.5 flex items-center justify-center">
+              <span class="absolute inset-0 rounded-full border border-white/40 plane-radar-ring"></span>
+              <i data-lucide="plane" class="w-3 h-3 text-white plane-icon-flight"></i>
+            </div>
+            <span>Patroli Horizon</span>
+          </div>
+        </div>
+
+        <div class="space-y-2 max-w-2xl motion-item">
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-apple-headline leading-tight anim-title">
+            Mengangkasa Melampaui Batas
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed font-normal anim-paragraph">
+            Mengeksplorasi arsitektur tata kelola madrasah dan perguruan tinggi Islam. Memadukan ketinggian instrumen mutu global dengan keluhuran nilai teologis <button class="term-btn" onclick="openTerm('Ihsan')"><span>Ihsan</span><span class="term-cite">Makbuloh, 2022</span></button> dan <button class="term-btn" onclick="openTerm('Itqan')"><span>Itqan</span><span class="term-cite">Shihab, 2012</span></button>.
+          </p>
+        </div>
+
+        <!-- 3D Three.js Interactive Miniature Viewport -->
+        <div class="w-full max-w-lg h-60 sm:h-64 relative rounded-3xl overflow-hidden anim-card-a border border-white/15 flex items-center justify-center cursor-grab active:cursor-grabbing shadow-2xl motion-item">
+          <div id="threeCanvasContainer" class="w-full h-full"></div>
+          <div class="absolute bottom-2.5 left-0 right-0 text-[10px] font-mono text-zinc-400 uppercase tracking-widest pointer-events-none anim-subtitle">
+            Tarik mendatar untuk memutar gedung dan orbit pesawat berlawanan
+          </div>
+        </div>
+
+        <div class="pt-1 flex items-center justify-center space-x-3 motion-item">
+          <button onclick="startPresentation()" class="px-8 py-3 rounded-2xl bg-white text-black font-semibold text-xs sm:text-sm hover:bg-zinc-200 transition shadow-xl shadow-white/10 flex items-center space-x-2 anim-badge">
+            <span>Mulai Pemaparan</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </section>
+
+      <section id="slide-2" class="slide-view max-w-4xl mx-auto space-y-6 my-auto">
+        <div class="flex items-center justify-between border-b border-white/[0.08] pb-2 w-full motion-item">
+          <span class="text-xs uppercase font-mono tracking-widest text-zinc-400 font-medium anim-subtitle">Artikel Penelitian Konseptual</span>
+          <div class="plane-loop-capsule anim-badge">
+            <i data-lucide="plane" class="w-3 h-3 text-white plane-icon-flight"></i>
+            <span>Jelajah Sintesis</span>
+          </div>
+        </div>
+
+        <div class="space-y-3 text-center sm:text-left motion-item">
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-apple-headline leading-snug anim-title">
+            Model-Model MMT dalam Pendidikan:<br>
+            <span class="text-zinc-400">TQM, TQE, ISO 9000, Malcolm Baldrige</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed max-w-3xl anim-paragraph">
+            Kajian komparatif dan sintesis integratif pendekatan mutu modern dalam mentransformasi tata kelola madrasah dan perguruan tinggi Islam secara terukur dan berkelanjutan <span class="font-mono text-zinc-400 text-xs">(Supriyanto, 1999; Nasution, 2000; Ross, 2017)</span>.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1 w-full">
+          <div class="anim-card-a p-5 rounded-2xl space-y-2 motion-item">
+            <p class="text-[11px] uppercase font-mono text-zinc-400 anim-subtitle">Penulis Pertama</p>
+            <h3 class="text-sm font-semibold text-white anim-title">Akbar Tausiur Rido</h3>
+            <p class="text-xs text-zinc-400 font-mono anim-paragraph">akbarrido.ar@gmail.com</p>
+          </div>
+          <div class="anim-card-a p-5 rounded-2xl space-y-2 motion-item">
+            <p class="text-[11px] uppercase font-mono text-zinc-400 anim-subtitle">Penulis Kedua</p>
+            <h3 class="text-sm font-semibold text-white anim-title">Muhammad Salman Alfarisi</h3>
+            <p class="text-xs text-zinc-400 font-mono anim-paragraph">msalmanalfarisi150901@gmail.com</p>
+          </div>
+          <div class="anim-card-a p-5 rounded-2xl space-y-2 motion-item">
+            <p class="text-[11px] uppercase font-mono text-zinc-400 anim-subtitle">Penulis Ketiga</p>
+            <h3 class="text-sm font-semibold text-white anim-title">Iman Firmansyah</h3>
+            <p class="text-xs text-zinc-400 font-mono anim-paragraph">iman.301289@gmail.com</p>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl border border-white/10 bg-white/5 text-xs text-zinc-300 flex items-center justify-between w-full motion-item anim-card-b">
+          <div class="flex items-center gap-2.5">
+            <img 
+              src="logo-uin.png" 
+              alt="Logo UIN SGD" 
+              class="h-5 w-5 object-contain" 
+              onerror="if(this.src.indexOf('logo%20uin.png')===-1 && this.src.indexOf('logo uin.png')===-1){this.src='logo uin.png';}else if(this.src.indexOf('wikimedia')===-1){this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/UIN_Sunan_Gunung_Djati_logo.png/320px-UIN_Sunan_Gunung_Djati_logo.png';}else{this.style.display='none';}"
+            />
+            <span class="anim-paragraph">Fakultas Tarbiyah dan Keguruan UIN Sunan Gunung Djati Bandung</span>
+          </div>
+          <span class="text-zinc-400 font-mono text-[11px] anim-subtitle">Kajian Pustaka Kualitatif Konseptual</span>
+        </div>
+      </section>
+
+      <section id="slide-3" class="slide-view max-w-5xl mx-auto space-y-5 my-auto">
+        <div class="border-b border-white/[0.08] pb-3 flex items-center justify-between w-full motion-item">
+          <div>
+            <span class="text-xs uppercase font-mono tracking-widest text-zinc-400 anim-subtitle">01 : The Burning Platform</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight anim-title">Dilema Sosiologis Tata Kelola Madrasah</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="plane-loop-capsule anim-badge">
+              <i data-lucide="plane" class="w-3 h-3 text-white plane-icon-flight"></i>
+              <span>Patroli Isu</span>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-zinc-300 text-xs font-mono anim-badge">Urgensi Perubahan</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+          <div class="anim-card-a p-5 rounded-2xl space-y-3 motion-item">
+            <div class="h-8 w-8 rounded-xl bg-white/10 flex items-center justify-center font-mono text-xs font-bold text-white anim-number">01</div>
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">
+              Jebakan <button class="term-btn" onclick="openTerm('Patrimonial')"><span>Patrimonial</span><span class="term-cite">Sonia, 2021</span></button>
+            </h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Kewenangan mutlak yang terpusat pada figur personal tunggal. Ketika terjadi suksesi kepemimpinan, kesinambungan institusi menjadi rapuh dan rentan kehilangan arah tata kelola.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-3 motion-item">
+            <div class="h-8 w-8 rounded-xl bg-white/10 flex items-center justify-center font-mono text-xs font-bold text-white anim-number">02</div>
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">Stigma Sekuler</h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Kekhawatiran keliru bahwa manajemen mutu modern bersifat sekuler dan meniadakan nilai ikhlas ibadah, dipicu komunikasi pimpinan yang belum menjembatani bahasa mutu dengan kearifan lokal <span class="font-mono text-zinc-400 text-xs">(Septiardilla dkk., 2026)</span>.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-3 motion-item">
+            <div class="h-8 w-8 rounded-xl bg-white/10 flex items-center justify-center font-mono text-xs font-bold text-white anim-number">03</div>
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">Formalisme Akreditasi</h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Penjaminan mutu direduksi menjadi perlombaan pengumpulan tumpukan berkas administratif demi legalitas status, mengabaikan esensi pengalaman belajar dan pembentukan karakter murid <span class="font-mono text-zinc-400 text-xs">(Makbuloh, 2022)</span>.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl anim-card-b flex items-center gap-3 text-xs sm:text-sm text-zinc-300 w-full motion-item">
+          <i data-lucide="arrow-right" class="w-4 h-4 text-white shrink-0"></i>
+          <span class="anim-paragraph"><strong>Arah Solusi:</strong> Bergeser dari hegemoni personal tak terukur menuju sistem mutu partisipatif yang akuntabel secara ilahiah dan profesional.</span>
+        </div>
+      </section>
+
+      <section id="slide-4" class="slide-view max-w-5xl mx-auto space-y-5 my-auto">
+        <div class="border-b border-white/[0.08] pb-3 flex items-center justify-between w-full motion-item">
+          <div>
+            <span class="text-xs uppercase font-mono tracking-widest text-zinc-400 anim-subtitle">02 : Theological Anchor</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight anim-title">Pilar Teologis dan Etis Budaya Mutu</h3>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="plane-loop-capsule anim-badge">
+              <i data-lucide="plane" class="w-3 h-3 text-white plane-icon-flight"></i>
+              <span>Orbit Teologis</span>
+            </div>
+            <span class="font-arabic text-xl text-zinc-200 anim-badge">إِحْسَان dan إِتْقَان</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          <div class="anim-card-a p-5 rounded-2xl space-y-2 motion-item">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm sm:text-base font-semibold text-white anim-title">
+                Prinsip <button class="term-btn" onclick="openTerm('Ihsan')"><span>Ihsan</span><span class="term-cite">Makbuloh, 2022</span></button>
+              </h4>
+              <span class="text-xs text-zinc-400 font-mono anim-badge">QS. Al-Mulk: 2</span>
+            </div>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Dorongan kesadaran ilahiah untuk menghadirkan ikhtiar terbaik (<button class="term-btn" onclick="openTerm('Ahsanu Amala')"><span>Ahsanu Amala</span><span class="term-cite">Shihab, 2012</span></button>) yang dilandasi ketulusan niat dan kesempurnaan mutu proses pembelajaran di atas standar formal minimum.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-2 motion-item">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm sm:text-base font-semibold text-white anim-title">
+                Prinsip <button class="term-btn" onclick="openTerm('Itqan')"><span>Itqan</span><span class="term-cite">Shihab, 2012</span></button>
+              </h4>
+              <span class="text-xs text-zinc-400 font-mono anim-badge">QS. At-Tawbah: 105</span>
+            </div>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Ketekunan, kecermatan, dan keprofesionalan dalam menuntaskan amanah pekerjaan di bawah kesadaran pengawasan ganda: pengawasan batiniah Ilahi dan pengawasan evaluasi institusi <span class="font-mono text-zinc-400 text-xs">(Solikah dkk., 2025)</span>.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-2 motion-item">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm sm:text-base font-semibold text-white anim-title">
+                Keadilan Institusi <button class="term-btn" onclick="openTerm('Keadilan Institusional')"><span>Keadilan</span><span class="term-cite">Hamka, 1984</span></button>
+              </h4>
+              <span class="text-xs text-zinc-400 font-mono anim-badge">QS. An-Nahl: 90</span>
+            </div>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Perlakuan transparan, nondiskriminatif, serta alokasi sumber daya yang proporsional bagi kemaslahatan dan pertumbuhan seluruh warga madrasah tanpa hak yang terabaikan.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-2 motion-item">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm sm:text-base font-semibold text-white anim-title">
+                Ikhtiar Pembaruan <button class="term-btn" onclick="openTerm('Islah')"><span>Islah</span><span class="term-cite">Yulianto, 2020</span></button>
+              </h4>
+              <span class="text-xs text-zinc-400 font-mono anim-badge">QS. Ar-Ra'd: 11</span>
+            </div>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Keharusan bersama untuk meninjau kelemahan tata kelola lama dan mengikhtiarkan perbaikan berkelanjutan secara sistemik dengan melibatkan komitmen seluruh sivitas <span class="font-mono text-zinc-400 text-xs">(Ardaini dkk., 2025)</span>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="slide-5" class="slide-view max-w-5xl mx-auto space-y-5 my-auto">
+        <div class="border-b border-white/[0.08] pb-3 flex items-center justify-between w-full motion-item">
+          <div>
+            <span class="text-xs uppercase font-mono tracking-widest text-zinc-400 anim-subtitle">03 : Model Pertama</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight anim-title">Total Quality Management (TQM)</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="plane-loop-capsule anim-badge">
+              <i data-lucide="plane" class="w-3 h-3 text-white plane-icon-flight"></i>
+              <span>Siklus Mutu</span>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-zinc-300 text-xs font-mono anim-badge">Deming dan Juran</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+          <div class="anim-card-a p-5 rounded-2xl space-y-3 motion-item">
+            <div class="text-[11px] font-mono text-zinc-400 uppercase tracking-wider anim-subtitle">
+              Deming Principle <span class="text-zinc-500">(1986)</span>
+            </div>
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">Keteguhan Tujuan dan Zero Fear</h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Membangun arah jangka panjang yang konsisten dan melenyapkan rasa takut di ruang guru. Pendidik berani menyampaikan kendala belajar siswa tanpa kekhawatiran dipersalahkan secara personal <span class="font-mono text-zinc-400 text-xs">(Marshall dkk., 2004)</span>.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-3 motion-item">
+            <div class="text-[11px] font-mono text-zinc-400 uppercase tracking-wider anim-subtitle">
+              Juran Trilogy <span class="text-zinc-500">(1992)</span>
+            </div>
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">Trilogi Mutu Terintegrasi</h4>
+            <ul class="text-xs sm:text-sm text-zinc-300 space-y-2">
+              <li class="anim-list-item"><strong class="text-white">Planning:</strong> Pemetaan kebutuhan murid dan pemangku kepentingan.</li>
+              <li class="anim-list-item"><strong class="text-white">Control:</strong> Supervisi jujur penopang proses operasional.</li>
+              <li class="anim-list-item"><strong class="text-white">Improvement:</strong> Pelatihan berbasis temuan akar masalah <span class="font-mono text-zinc-400 text-xs">(Januariani & Akhyak, 2024)</span>.</li>
+            </ul>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-3 motion-item">
+            <div class="text-[11px] font-mono text-zinc-400 uppercase tracking-wider anim-subtitle">Filosofi Islah</div>
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">
+              Budaya <button class="term-btn" onclick="openTerm('Kaizen')"><span>Kaizen</span><span class="term-cite">Hastuti dkk., 2025</span></button> Bertahap
+            </h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Penyempurnaan kecil harian secara konsisten dengan melibatkan seluruh warga madrasah, selaras dengan semangat <button class="term-btn" onclick="openTerm('Islah')"><span>Islah</span><span class="term-cite">Yulianto, 2020</span></button> dalam khazanah pendidikan Islam.
+            </p>
+          </div>
+        </div>
+
+        <div class="anim-card-b p-3.5 rounded-xl flex items-center justify-between text-xs sm:text-sm text-zinc-300 w-full motion-item">
+          <span class="anim-paragraph"><strong>Fokus Kemitraan:</strong> Murid dimuliakan sebagai subjek pembelajar dengan hak perkembangan akhlak, bukan komoditas barang pabrik <span class="font-mono text-zinc-400 text-xs">(Ross, 2017)</span>.</span>
+          <span class="text-zinc-400 font-mono text-xs hidden sm:inline anim-subtitle">Tanggung Jawab Kolektif</span>
+        </div>
+      </section>
+
+      <section id="slide-6" class="slide-view max-w-5xl mx-auto space-y-5 my-auto">
+        <div class="border-b border-white/[0.08] pb-3 flex items-center justify-between w-full motion-item">
+          <div>
+            <span class="text-xs uppercase font-mono tracking-widest text-zinc-400 anim-subtitle">04 : Model Kedua</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight anim-title">Total Quality Education (TQE)</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="plane-loop-capsule anim-badge">
+              <i data-lucide="plane" class="w-3 h-3 text-white plane-icon-flight"></i>
+              <span>Humanisasi Mutu</span>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-zinc-300 text-xs font-mono anim-badge">Edward Sallis (2010)</span>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl anim-card-b border-l-2 border-l-white text-xs sm:text-sm text-zinc-200 w-full motion-item">
+          <span class="anim-paragraph"><strong>Aksentuasi Kunci:</strong> Lembaga pendidikan mendidik insan berjiwa dengan latar belakang beragam, bukan mencetak produk barang industri yang seragam <span class="font-mono text-zinc-400 text-xs">(Crawford & Shutler, 1999)</span>.</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          <div class="anim-card-a p-6 rounded-2xl space-y-3 motion-item">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm sm:text-base font-semibold text-white anim-title">
+                <button class="term-btn" onclick="openTerm('Hard Quality')"><span>Hard Quality</span><span class="term-cite">Sallis, 2010</span></button>
+              </h4>
+              <span class="text-xs text-zinc-400 font-mono anim-badge">Dimensi Terukur</span>
+            </div>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Kelengkapan fasilitas sarana belajar, ketepatan administrasi, skor asesmen, dan persentase kelulusan. Berfungsi sebagai prasyarat dasar kepatuhan standar formal kelembagaan.
+            </p>
+            <div class="text-[11px] text-zinc-400 font-mono pt-1 border-t border-white/[0.06] anim-subtitle">
+              Batasan: Angka tinggi belum menjamin kedalaman pemahaman kognitif dan akhlak murid <span class="text-zinc-500">(Saifulloh dkk., 2012)</span>.
+            </div>
+          </div>
+
+          <div class="anim-card-a p-6 rounded-2xl space-y-3 motion-item">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm sm:text-base font-semibold text-white anim-title">
+                <button class="term-btn" onclick="openTerm('Soft Quality')"><span>Soft Quality</span><span class="term-cite">Sallis, 2010</span></button>
+              </h4>
+              <span class="text-xs text-zinc-400 font-mono anim-badge">Dimensi Jiwa dan Adab</span>
+            </div>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Kualitas relasi interpersonal pendidik dan murid, keteladanan moral, pembiasaan adab ibadah bermakna, rasa aman emosional, dan kepedulian sosial di lingkungan madrasah.
+            </p>
+            <div class="text-[11px] text-zinc-400 font-mono pt-1 border-t border-white/[0.06] anim-subtitle">
+              Esensi: Jantung sesungguhnya dari pembentukan karakter pendidikan Islam <span class="text-zinc-500">(Supriyanto, 1999)</span>.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="slide-7" class="slide-view max-w-5xl mx-auto space-y-5 my-auto">
+        <div class="border-b border-white/[0.08] pb-3 flex items-center justify-between w-full motion-item">
+          <div>
+            <span class="text-xs uppercase font-mono tracking-widest text-zinc-400 anim-subtitle">05 : Model Ketiga</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight anim-title">Sistem Manajemen Mutu ISO 9001:2015</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="plane-loop-capsule anim-badge">
+              <i data-lucide="plane" class="w-3 h-3 text-white plane-icon-flight"></i>
+              <span>Disiplin Prosedur</span>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-zinc-300 text-xs font-mono anim-badge">Konsistensi Layanan</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+          <div class="anim-card-a p-5 rounded-2xl space-y-3 motion-item">
+            <div class="h-8 w-8 rounded-xl bg-white/10 flex items-center justify-center font-mono font-bold text-xs text-white anim-number">
+              PDCA
+            </div>
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">
+              Siklus <button class="term-btn" onclick="openTerm('PDCA')"><span>PDCA</span><span class="term-cite">Isnaini dkk., 2020</span></button>
+            </h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Plan, Do, Check, Act menjamin perencanaan ditopang pembagian tugas nyata, audit internal berkala yang mendidik, dan tindakan koreksi sistematis tanpa henti <span class="font-mono text-zinc-400 text-xs">(Fernández-Cruz dkk., 2019)</span>.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-3 motion-item">
+            <div class="h-8 w-8 rounded-xl bg-white/10 flex items-center justify-center font-mono font-bold text-xs text-white anim-number">
+              RBT
+            </div>
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">
+              <button class="term-btn" onclick="openTerm('Risk-Based Thinking')"><span>Risk Thinking</span><span class="term-cite">Ikhtiar dkk., 2023</span></button>
+            </h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Memetakan potensi kendala operasional sejak dini (penurunan minat santri baru, keterbatasan dana, gangguan data) sebelum berdampak buruk pada mutu layanan <span class="font-mono text-zinc-400 text-xs">(Kamusoko, 2020)</span>.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-3 motion-item">
+            <div class="h-8 w-8 rounded-xl bg-white/10 flex items-center justify-center font-mono font-bold text-xs text-white anim-number">
+              DOC
+            </div>
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">Memori Kelembagaan</h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Pengendalian dokumen terstruktur mencegah amnesia organisasi. Prosedur tetap berjalan konsisten meskipun terjadi suksesi kepala madrasah atau pengurus yayasan <span class="font-mono text-zinc-400 text-xs">(Isnaini dkk., 2020)</span>.
+            </p>
+          </div>
+        </div>
+
+        <div class="anim-card-b p-3.5 rounded-xl flex items-center justify-between text-xs sm:text-sm text-zinc-300 w-full motion-item">
+          <span class="anim-paragraph"><strong>Antitesis Birokratisasi:</strong> Prosedur SOP harus menyederhanakan tugas pendampingan guru terhadap murid, bukan menjadi beban tumpukan kertas <span class="font-mono text-zinc-400 text-xs">(Seruni dkk., 2025)</span>.</span>
+        </div>
+      </section>
+
+      <section id="slide-8" class="slide-view max-w-5xl mx-auto space-y-5 my-auto">
+        <div class="border-b border-white/[0.08] pb-3 flex items-center justify-between w-full motion-item">
+          <div>
+            <span class="text-xs uppercase font-mono tracking-widest text-zinc-400 anim-subtitle">06 : Model Keempat</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight anim-title">Malcolm Baldrige Performance Excellence</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="plane-loop-capsule anim-badge">
+              <i data-lucide="plane" class="w-3 h-3 text-white plane-icon-flight"></i>
+              <span>Audit Kinerja</span>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-zinc-300 text-xs font-mono anim-badge">Badri dkk. (2006)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          <div class="anim-card-a p-6 rounded-2xl space-y-3 motion-item">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm sm:text-base font-semibold text-white anim-title">
+                Evaluasi Proses: <button class="term-btn" onclick="openTerm('ADLI')"><span>ADLI</span><span class="term-cite">Fauzi, 2021</span></button>
+              </h4>
+              <span class="text-xs text-zinc-400 font-mono anim-badge">Kematangan Sistem</span>
+            </div>
+            <ul class="text-xs sm:text-sm text-zinc-300 space-y-2">
+              <li class="anim-list-item"><strong class="text-white">Approach:</strong> Desain metode kerja terstruktur dan selaras kebutuhan.</li>
+              <li class="anim-list-item"><strong class="text-white">Deployment:</strong> Penerapan menyeluruh di setiap unit kerja kampus.</li>
+              <li class="anim-list-item"><strong class="text-white">Learning:</strong> Siklus refleksi berbasis data untuk perbaikan terus menerus.</li>
+              <li class="anim-list-item"><strong class="text-white">Integration:</strong> Keselarasan proses operasional dengan visi misi lembaga.</li>
+            </ul>
+          </div>
+
+          <div class="anim-card-a p-6 rounded-2xl space-y-3 motion-item">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm sm:text-base font-semibold text-white anim-title">
+                Evaluasi Hasil: <button class="term-btn" onclick="openTerm('LeTCI')"><span>LeTCI</span><span class="term-cite">Fauzi, 2021</span></button>
+              </h4>
+              <span class="text-xs text-zinc-400 font-mono anim-badge">Validitas Dampak</span>
+            </div>
+            <ul class="text-xs sm:text-sm text-zinc-300 space-y-2">
+              <li class="anim-list-item"><strong class="text-white">Levels:</strong> Tingkat capaian kinerja pada periode pengukuran tertentu.</li>
+              <li class="anim-list-item"><strong class="text-white">Trends:</strong> Arah laju perkembangan capaian institusi lintas tahun.</li>
+              <li class="anim-list-item"><strong class="text-white">Comparisons:</strong> Pembandingan objektif terhadap kinerja institusi mitra.</li>
+              <li class="anim-list-item"><strong class="text-white">Integration:</strong> Relevansi hasil capaian terhadap sasaran strategis prioritas.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="anim-card-b p-3 rounded-xl text-xs text-zinc-300 text-center w-full motion-item">
+          <span class="anim-paragraph">Tujuh Kategori Sistemik: Kepemimpinan, Perencanaan Strategis, Fokus Mahasiswa, Pengukuran Data, Tenaga Kerja, Operasi, dan Hasil Organisasi <span class="font-mono text-zinc-400 text-xs">(Kumar dkk., 2020)</span>.</span>
+        </div>
+      </section>
+
+      <section id="slide-9" class="slide-view max-w-5xl mx-auto space-y-5 my-auto">
+        <div class="border-b border-white/[0.08] pb-3 flex items-center justify-between w-full motion-item">
+          <div>
+            <span class="text-xs uppercase font-mono tracking-widest text-zinc-400 anim-subtitle">07 : Sintesis Komparatif</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight anim-title">Integrasi Simultan Empat Model Mutu</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="plane-loop-capsule anim-badge">
+              <i data-lucide="plane" class="w-3 h-3 text-white plane-icon-flight"></i>
+              <span>Ekosistem Terpadu</span>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-zinc-300 text-xs font-mono anim-badge">Irwanto dkk. (2023)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center w-full">
+          <div class="anim-card-a p-4 rounded-2xl space-y-2 motion-item">
+            <div class="text-xs font-bold text-white uppercase tracking-wider font-mono anim-title">TQM</div>
+            <p class="text-[11px] text-zinc-400 font-mono anim-subtitle">Pondasi Budaya</p>
+            <p class="text-xs text-zinc-300 leading-relaxed anim-paragraph">Menumbuhkan komitmen kepemimpinan dialogis dan rasa memiliki kolektif seluruh sivitas.</p>
+          </div>
+          <div class="anim-card-a p-4 rounded-2xl space-y-2 motion-item">
+            <div class="text-xs font-bold text-white uppercase tracking-wider font-mono anim-title">TQE</div>
+            <p class="text-[11px] text-zinc-400 font-mono anim-subtitle">Jangkar Adab</p>
+            <p class="text-xs text-zinc-300 leading-relaxed anim-paragraph">Menjaga kemuliaan relasi manusiawi, pembiasaan akhlak, dan makna belajar murid.</p>
+          </div>
+          <div class="anim-card-a p-4 rounded-2xl space-y-2 motion-item">
+            <div class="text-xs font-bold text-white uppercase tracking-wider font-mono anim-title">ISO 9001</div>
+            <p class="text-[11px] text-zinc-400 font-mono anim-subtitle">Disiplin Prosedur</p>
+            <p class="text-xs text-zinc-300 leading-relaxed anim-paragraph">Menjamin konsistensi alur SOP, mitigasi risiko operasional, dan kejelasan data arsip.</p>
+          </div>
+          <div class="anim-card-a p-4 rounded-2xl space-y-2 motion-item">
+            <div class="text-xs font-bold text-white uppercase tracking-wider font-mono anim-title">Baldrige</div>
+            <p class="text-[11px] text-zinc-400 font-mono anim-subtitle">Diagnosis Kinerja</p>
+            <p class="text-xs text-zinc-300 leading-relaxed anim-paragraph">Mengukur hubungan sebab akibat antara kematangan proses ADLI dengan dampak LeTCI.</p>
+          </div>
+        </div>
+
+        <div class="p-4 rounded-2xl anim-card-b border border-white/15 text-xs sm:text-sm text-zinc-200 leading-relaxed text-center w-full motion-item">
+          <span class="anim-paragraph">Integrasi simultan memampukan madrasah dan perguruan tinggi Islam melampaui Standar Nasional Pendidikan (SNP) menuju rekognisi global tanpa kehilangan marwah keislamannya <span class="font-mono text-zinc-400 text-xs">(Ristianah & Ma’sum, 2022; Hart & Rodgers, 2023)</span>.</span>
+        </div>
+      </section>
+
+      <section id="slide-10" class="slide-view max-w-5xl mx-auto space-y-5 my-auto">
+        <div class="border-b border-white/[0.08] pb-3 flex items-center justify-between w-full motion-item">
+          <div>
+            <span class="text-xs uppercase font-mono tracking-widest text-zinc-400 anim-subtitle">08 : Kritik Realitas</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight anim-title">Anatomi Tantangan Implementasi</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="plane-loop-capsule anim-badge">
+              <i data-lucide="plane" class="w-3 h-3 text-white plane-icon-flight"></i>
+              <span>Radar Kendala</span>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-zinc-300 text-xs font-mono anim-badge">Azizah dkk. (2025)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+          <div class="anim-card-a p-5 rounded-2xl space-y-2 motion-item">
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">Resistensi dan Budaya Feodal</h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Staf merasa sungkan atau khawatir menyampaikan kendala nyata proses karena takut dianggap melawan hierarki pimpinan, sehingga evaluasi mandeg menjadi formalitas semata <span class="font-mono text-zinc-400 text-xs">(Sonia, 2021)</span>.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-2 motion-item">
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">Kelelahan Administratif</h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Pendidik disibukkan oleh pengisian instrumen formulir pelaporan yang berlebihan tanpa pelatihan memadai mengenai makna hakiki perbaikan kualitas belajar mengajar <span class="font-mono text-zinc-400 text-xs">(Irwanto dkk., 2023)</span>.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-2 motion-item">
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">Keterbatasan Fiskal dan Dana</h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Ketergantungan pembiayaan pada donatur atau SPP minim membuat program pelatihan mutu guru kerap tersingkir oleh kebutuhan operasional fisik mendesak <span class="font-mono text-zinc-400 text-xs">(Maqbool, 2023)</span>.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-2 motion-item">
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">Kerapuhan Tata Kelola Data</h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Data akademik tersimpan terpisah atau hanya di ingatan personal staf, menyulitkan pelacakan riwayat perkembangan capaian jangka panjang dan analisis kesenjangan mutu <span class="font-mono text-zinc-400 text-xs">(Salsabila, 2025)</span>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="slide-11" class="slide-view max-w-5xl mx-auto space-y-5 my-auto">
+        <div class="border-b border-white/[0.08] pb-3 flex items-center justify-between w-full motion-item">
+          <div>
+            <span class="text-xs uppercase font-mono tracking-widest text-zinc-400 anim-subtitle">09 : Langkah Strategis</span>
+            <h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight anim-title">Peta Jalan Solusi Berkelanjutan</h3>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="plane-loop-capsule anim-badge">
+              <i data-lucide="plane" class="w-3 h-3 text-white plane-icon-flight"></i>
+              <span>Arah Strategis</span>
+            </div>
+            <span class="px-3 py-1 rounded-full bg-white/10 text-zinc-300 text-xs font-mono anim-badge">Solusi Taktis</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
+          <div class="anim-card-a p-5 rounded-2xl space-y-3 motion-item">
+            <div class="h-8 w-8 rounded-xl bg-white/10 flex items-center justify-center font-mono font-bold text-xs text-white anim-number">1</div>
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">Kepemimpinan Dialogis</h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Menghubungkan target mutu dengan amanah dan prinsip <button class="term-btn" onclick="openTerm('Itqan')"><span>Itqan</span><span class="term-cite">Shihab, 2012</span></button>, sehingga sivitas memahami pembenahan bukan beban melainkan pengabdian profesional <span class="font-mono text-zinc-400 text-xs">(Makbuloh, 2022)</span>.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-3 motion-item">
+            <div class="h-8 w-8 rounded-xl bg-white/10 flex items-center justify-center font-mono font-bold text-xs text-white anim-number">2</div>
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">Peta Jalan Bertahap</h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Menata alur prioritas melalui <button class="term-btn" onclick="openTerm('Gap Analysis')"><span>Gap Analysis</span><span class="term-cite">Ikhtiar dkk., 2023</span></button>, menguji coba pada lingkup kecil, lalu memperluas sistem sesuai kapasitas dana lembaga <span class="font-mono text-zinc-400 text-xs">(Fatmawaty dkk., 2024)</span>.
+            </p>
+          </div>
+
+          <div class="anim-card-a p-5 rounded-2xl space-y-3 motion-item">
+            <div class="h-8 w-8 rounded-xl bg-white/10 flex items-center justify-center font-mono font-bold text-xs text-white anim-number">3</div>
+            <h4 class="text-sm sm:text-base font-semibold text-white anim-title">Basis Data Terpadu</h4>
+            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed anim-paragraph">
+              Membangun sistem informasi digital yang terpusat dan aman agar keputusan strategis madrasah berpijak pada data empiris yang dapat dipertanggungjawabkan <span class="font-mono text-zinc-400 text-xs">(Wardhani dkk., 2024)</span>.
+            </p>
+          </div>
+        </div>
+
+        <div class="p-3.5 rounded-xl anim-card-b text-xs text-zinc-300 text-center w-full motion-item">
+          <span class="anim-paragraph">Peningkatan kompetensi staf melalui forum bedah kasus berkala jauh lebih efektif daripada sosialisasi sertifikasi yang bersifat seremonial <span class="font-mono text-zinc-400 text-xs">(Fatmawaty dkk., 2024)</span>.</span>
+        </div>
+      </section>
+
+      <section id="slide-12" class="slide-view max-w-4xl mx-auto space-y-6 my-auto text-center">
+        <div class="flex items-center justify-center gap-2 motion-item">
+          <div class="plane-loop-capsule anim-badge">
+            <i data-lucide="plane" class="w-3 h-3 text-white plane-icon-flight"></i>
+            <span>Pendaratan Paripurna</span>
+          </div>
+          <span class="text-xs uppercase font-mono tracking-widest text-zinc-400 font-medium anim-subtitle">Sintesis Penutup</span>
+        </div>
+
+        <div class="space-y-3 max-w-2xl mx-auto motion-item">
+          <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-apple-headline leading-tight anim-title">
+            Mutu sebagai Amanah Peradaban
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed anim-paragraph">
+            Penerapan manajemen mutu terpadu dalam pendidikan Islam bukanlah sekadar pemenuhan selembar sertifikat akreditasi di dinding kantor <span class="font-mono text-zinc-400 text-xs">(Makbuloh, 2022; Sallis, 2010)</span>.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-3xl anim-card-a max-w-2xl mx-auto space-y-3 text-left motion-item">
+          <p class="text-xs sm:text-sm text-zinc-200 leading-relaxed anim-paragraph">
+            Keberhasilan mutu sejati tercapai manakala presisi instrumen TQM, TQE, ISO, dan Baldrige berpadu harmonis dengan kesucian niat <strong class="text-white">Ihsan</strong> dan ketelitian kerja <strong class="text-white">Itqan</strong>.
+          </p>
+          <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed anim-paragraph">
+            Dengan keterpaduan ini, institusi pendidikan Islam akan melahirkan generasi yang tidak hanya unggul secara kognitif dan profesional, tetapi juga berakar kokoh pada keluhuran adab, keadilan, dan kemaslahatan umat.
+          </p>
+        </div>
+
+        <div class="pt-2 flex justify-center gap-3 motion-item">
+          <button onclick="goToSlide(1)" class="px-7 py-2.5 rounded-2xl border border-white/20 text-xs text-zinc-300 hover:text-white hover:border-white/50 transition anim-badge">
+            Ulangi Pemaparan
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="relative z-40 h-20 w-full border-t border-white/[0.08] bg-black/70 backdrop-blur-2xl px-6 flex items-center justify-between">
+    <div class="flex items-center space-x-2 text-xs text-zinc-400 hidden sm:flex">
+      <span class="anim-subtitle">Navigasi:</span>
+      <kbd class="px-2 py-0.5 rounded bg-white/10 border border-white/15 text-zinc-300 font-mono anim-badge">Panah Kiri</kbd>
+      <kbd class="px-2 py-0.5 rounded bg-white/10 border border-white/15 text-zinc-300 font-mono anim-badge">Panah Kanan</kbd>
+      <span class="anim-subtitle">atau</span>
+      <kbd class="px-2 py-0.5 rounded bg-white/10 border border-white/15 text-zinc-300 font-mono anim-badge">Spasi</kbd>
+    </div>
+
+    <div class="flex items-center space-x-3 ml-auto sm:ml-0">
+      <button id="prevBtn" onclick="prevSlide()" class="px-4 py-2 text-xs font-medium rounded-xl border border-white/15 hover:border-white/40 text-zinc-200 transition flex items-center space-x-1.5 disabled:opacity-30 disabled:pointer-events-none anim-badge">
+        <i data-lucide="chevron-left" class="w-4 h-4"></i>
+        <span>Sebelumnya</span>
+      </button>
+
+      <button id="nextBtn" onclick="nextSlide()" class="px-5 py-2 text-xs font-semibold rounded-xl bg-white text-black hover:bg-zinc-200 transition flex items-center space-x-1.5 shadow-md shadow-white/5 anim-badge">
+        <span>Selanjutnya</span>
+        <i data-lucide="chevron-right" class="w-4 h-4"></i>
+      </button>
+    </div>
+  </footer>
+
+  <div id="termModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="anim-card-a max-w-lg w-full p-6 rounded-3xl border border-white/25 shadow-2xl space-y-4">
+      <div class="flex items-center justify-between border-b border-white/[0.08] pb-3">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] uppercase font-mono tracking-widest text-zinc-400 anim-subtitle">Glosarium Akademik</span>
+            <span id="termCitationBadge" class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 text-zinc-300 border border-white/15"></span>
+          </div>
+          <h4 id="termTitle" class="text-lg font-bold text-white mt-0.5 anim-title">Istilah</h4>
+        </div>
+        <button onclick="closeTerm()" class="h-8 w-8 rounded-full border border-white/15 flex items-center justify-center text-zinc-400 hover:text-white transition anim-badge">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3 text-xs sm:text-sm text-zinc-300 leading-relaxed">
+        <div class="p-3.5 rounded-2xl bg-white/[0.03] border border-white/10">
+          <strong class="text-zinc-200 text-xs block mb-1">Definisi Konseptual:</strong>
+          <p id="termDefinition" class="text-zinc-100 font-medium anim-paragraph"></p>
+        </div>
+        
+        <div class="p-3.5 rounded-2xl bg-white/5 border border-white/10 text-xs text-zinc-400 anim-card-b">
+          <strong class="text-zinc-200 block mb-1">Relevansi dan Landasan Ilmiah Pendidikan Islam:</strong>
+          <span id="termContext" class="anim-paragraph"></span>
+        </div>
+      </div>
+
+      <div class="pt-2 flex justify-between items-center">
+        <span id="termFullReference" class="text-[11px] font-mono text-zinc-500"></span>
+        <button onclick="closeTerm()" class="px-4 py-1.5 text-xs font-semibold rounded-xl bg-white/15 hover:bg-white/25 text-white transition anim-badge">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="speakerDrawer" class="fixed bottom-24 right-6 z-50 w-96 max-h-[500px] anim-card-a border border-white/30 rounded-3xl p-5 shadow-2xl hidden flex-col space-y-3">
+    <div class="flex items-center justify-between border-b border-white/[0.08] pb-2">
+      <div class="flex items-center space-x-2">
+        <span class="h-2 w-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="text-xs font-mono font-semibold tracking-wider text-zinc-200 uppercase anim-subtitle">Teleprompter Naskah Lengkap (N)</span>
+      </div>
+      <button onclick="toggleSpeakerNotes()" class="text-xs text-zinc-400 hover:text-white anim-badge">✕</button>
+    </div>
+    <div id="speakerContent" class="overflow-y-auto pr-2 text-xs leading-relaxed text-zinc-300 space-y-3 max-h-[400px]">
+      <!-- Populated dynamically via JS -->
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 12;
+    let audioActive = true;
+
+    // Web Audio API Synthesizer (Instant response, zero network latency)
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new AudioCtx();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function soundClick() {
+      if (!audioActive) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(650, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(240, ctx.currentTime + 0.035);
+        gain.gain.setValueAtTime(0.045, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.035);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.035);
+      } catch (e) {}
+    }
+
+    function soundSlide() {
+      if (!audioActive) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(220, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(460, ctx.currentTime + 0.06);
+        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.06);
+      } catch (e) {}
+    }
+
+    function soundRotate() {
+      if (!audioActive) return;
+      try {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(420, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(390, ctx.currentTime + 0.02);
+        gain.gain.setValueAtTime(0.015, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.02);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.02);
+      } catch (e) {}
+    }
+
+    function soundModal() {
+      if (!audioActive) return;
+      try {
+        const ctx = getAudioContext();
+        const osc1 = ctx.createOscillator();
+        const osc2 = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc1.frequency.setValueAtTime(523.25, ctx.currentTime);
+        osc2.frequency.setValueAtTime(659.25, ctx.currentTime);
+        gain.gain.setValueAtTime(0.04, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.12);
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(ctx.destination);
+        osc1.start();
+        osc2.start();
+        osc1.stop(ctx.currentTime + 0.12);
+        osc2.stop(ctx.currentTime + 0.12);
+      } catch (e) {}
+    }
+
+    function toggleAudio() {
+      audioActive = !audioActive;
+      const indicator = document.getElementById('audioIndicator');
+      indicator.className = audioActive ? 'h-1.5 w-1.5 rounded-full bg-emerald-400' : 'h-1.5 w-1.5 rounded-full bg-zinc-600';
+      soundClick();
+    }
+
+    function toggleFullscreen() {
+      soundClick();
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+
+    function startPresentation() {
+      soundClick();
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      }
+      goToSlide(2);
+    }
+
+    function updateSlideDisplay(direction = 'forward') {
+      for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById(`slide-${i}`);
+        if (!slide) continue;
+
+        if (i === currentSlide) {
+          slide.classList.remove('exit-forward', 'exit-backward');
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+          if (direction === 'forward') {
+            slide.classList.add('exit-forward');
+            slide.classList.remove('exit-backward');
+          } else {
+            slide.classList.add('exit-backward');
+            slide.classList.remove('exit-forward');
+          }
+        }
+      }
+
+      // Progress bar and counter
+      const counter = document.getElementById('slideCounter');
+      const progressBar = document.getElementById('progressBar');
+      if (counter) counter.innerText = `${currentSlide < 10 ? '0' + currentSlide : currentSlide} / ${totalSlides}`;
+      if (progressBar) progressBar.style.width = `${(currentSlide / totalSlides) * 100}%`;
+
+      // Navigation button states
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      if (prevBtn) {
+        prevBtn.disabled = currentSlide === 1;
+      }
+      if (nextBtn) {
+        if (currentSlide === totalSlides) {
+          nextBtn.innerHTML = `<span>Selesai</span>`;
+        } else {
+          nextBtn.innerHTML = `<span>Selanjutnya</span><i data-lucide="chevron-right" class="w-4 h-4"></i>`;
+        }
+      }
+
+      updateSpeakerContent();
+      lucide.createIcons();
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        soundSlide();
+        updateSlideDisplay('forward');
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        soundSlide();
+        updateSlideDisplay('backward');
+      }
+    }
+
+    function goToSlide(target) {
+      if (target >= 1 && target <= totalSlides) {
+        const dir = target >= currentSlide ? 'forward' : 'backward';
+        currentSlide = target;
+        soundSlide();
+        updateSlideDisplay(dir);
+      }
+    }
+
+    const glossaryData = {
+      'Ihsan': {
+        title: 'Ihsan',
+        citation: 'Makbuloh, 2022; Solikah dkk., 2025; Ardaini dkk., 2025',
+        definition: 'Dorongan batiniah dan spiritual untuk senantiasa mempersembahkan ikhtiar serta karya terbaik (Ahsanu Amala) karena kesadaran mendalam bahwa setiap amal perbuatan senantiasa berada dalam pengawasan Ilahi (Makbuloh, 2022).',
+        context: 'Menjadi ruh etis agar perbaikan tata kelola madrasah tidak sekadar pemenuhan angka administratif, melainkan pengabdian tulus yang melahirkan keunggulan nyata bagi pembentukan adab dan keilmuan murid (Solikah dkk., 2025).',
+        reference: 'Rujukan: Makbuloh (2022); Solikah dkk. (2025); Ardaini dkk. (2025)'
+      },
+      'Itqan': {
+        title: 'Itqan',
+        citation: 'Shihab, 2012; Makbuloh, 2022',
+        definition: 'Prinsip profesionalisme Islam yang menuntut ketekunan, kecermatan, kemantapan prosedur, dan kesungguhan dalam menuntaskan amanah pekerjaan hingga mencapai tingkat standar terbaik (Shihab, 2012; Makbuloh, 2022).',
+        context: 'Menjiwai standarisasi SOP dan kepatuhan sistem operasional agar madrasah dikelola secara disiplin waktu, tertata rapi, dan bebas dari kelalaian prosedur kerja (Shihab, 2012).',
+        reference: 'Rujukan: Shihab (2012, Tafsir Al-Misbah QS. At-Tawbah: 105); Makbuloh (2022)'
+      },
+      'Ahsanu Amala': {
+        title: 'Ahsanu Amala',
+        citation: 'Shihab, 2012; Ardaini dkk., 2025',
+        definition: 'Kualitas perbuatan atau amalan yang paling baik dan terpuji, ditandai oleh ketepatan metode kerja serta keikhlasan niat yang murni sebagaimana ditegaskan dalam Al-Qur an Surat Al-Mulk ayat 2 (Shihab, 2012).',
+        context: 'Menolak reduksi mutu pada formalisme angka kelulusan semata; lembaga pendidikan dinilai dari bobot mutu proses pendampingan dan nilai kebajikan yang menyertai kelulusan siswa (Ardaini dkk., 2025).',
+        reference: 'Rujukan: Shihab (2012); Ardaini dkk. (2025)'
+      },
+      'Patrimonial': {
+        title: 'Kepemimpinan Patrimonial',
+        citation: 'Sonia, 2021; Supriyanto, 1999',
+        definition: 'Pola tata kelola tradisional yang memusatkan seluruh otoritas, kebijakan, dan arah institusi pada figur sentral pimpinan secara hierarkis-feodal tanpa pembagian peran yang terukur (Sonia, 2021).',
+        context: 'Tantangan sosiologis terbesar di lembaga pendidikan Islam yang menyebabkan ketergantungan personal berlebih dan membuat institusi rentan kehilangan arah saat pimpinan utama berganti (Sonia, 2021; Supriyanto, 1999).',
+        reference: 'Rujukan: Sonia (2021); Supriyanto (1999)'
+      },
+      'Kaizen': {
+        title: 'Kaizen (Perbaikan Bertahap)',
+        citation: 'Hastuti dkk., 2025; Nasution, 2000',
+        definition: 'Filosofi manajemen mutu asal Jepang yang menitikberatkan pada perbaikan proses berkesinambungan secara bertahap, harian, dan konsisten dengan melibatkan seluruh unsur staf (Hastuti dkk., 2025; Nasution, 2000).',
+        context: 'Selaras dengan semangat Islah dalam Islam, mendorong warga madrasah menata kendala harian kecil daripada menanti perombakan besar yang memberatkan secara dana dan tenaga (Hastuti dkk., 2025).',
+        reference: 'Rujukan: Hastuti dkk. (2025); Nasution (2000)'
+      },
+      'Islah': {
+        title: 'Islah (Pembaruan Konstruktif)',
+        citation: 'Yulianto, 2020; Hamka, 1984',
+        definition: 'Prinsip pembenahan dan revitalisasi terus menerus untuk merestorasi tatanan yang kurang efektif menjadi lebih adil, maslahat, dan berfungsi optimal sesuai tuntunan Surat Ar-Ra d ayat 11 (Hamka, 1984; Yulianto, 2020).',
+        context: 'Menjadi landasan etis-teologis bagi madrasah untuk melakukan evaluasi diri secara jujur dan terus melakukan perbaikan mutu pembelajaran secara sistemik (Yulianto, 2020).',
+        reference: 'Rujukan: Hamka (1984, Tafsir Al-Azhar); Yulianto (2020)'
+      },
+      'Hard Quality': {
+        title: 'Hard Quality (Mutu Keras Terukur)',
+        citation: 'Sallis, 2010; Crawford & Shutler, 1999',
+        definition: 'Dimensi mutu pendidikan yang bersifat fisik, terukur secara numerik, dan mudah diamati seperti sarana prasarana, rasio kelulusan, dan status akreditasi formal (Sallis, 2010).',
+        context: 'Berfungsi sebagai standar minimum kepatuhan kelembagaan yang harus dipenuhi madrasah, namun tidak boleh diperlakukan sebagai representasi tunggal keberhasilan pendidikan (Crawford & Shutler, 1999; Sallis, 2010).',
+        reference: 'Rujukan: Sallis (2010); Crawford & Shutler (1999)'
+      },
+      'Soft Quality': {
+        title: 'Soft Quality (Mutu Lunak Jiwa dan Adab)',
+        citation: 'Sallis, 2010; Supriyanto, 1999',
+        definition: 'Dimensi mutu pendidikan yang berakar pada kualitas relasi manusiawi, atmosfer adab, kehangatan empati pendidik, rasa aman psikologis, dan pembentukan karakter moral murid (Sallis, 2010).',
+        context: 'Merupakan jantung utama pendidikan Islam yang tidak dapat direduksi hanya dalam selembar angka, melainkan dirasakan dalam kebiasaan hidup sehari-hari di madrasah (Supriyanto, 1999; Sallis, 2010).',
+        reference: 'Rujukan: Sallis (2010); Supriyanto (1999)'
+      },
+      'PDCA': {
+        title: 'Siklus PDCA (Plan-Do-Check-Act)',
+        citation: 'Isnaini dkk., 2020; Nasution, 2000',
+        definition: 'Metode empat langkah berulang untuk pengendalian dan peningkatan mutu berkelanjutan: Perencanaan tujuan, Pelaksanaan tugas, Pemeriksaan hasil supervisi, dan Tindakan koreksi sistemik (Isnaini dkk., 2020; Nasution, 2000).',
+        context: 'Instrumen kunci ISO 9001 yang menuntun madrasah agar memiliki alur kerja sistematis dan terus belajar dari evaluasi masa lalu tanpa kultur mencari kesalahan individu (Isnaini dkk., 2020).',
+        reference: 'Rujukan: Isnaini, Syukur, & Khunaifi (2020); Nasution (2000)'
+      },
+      'Risk-Based Thinking': {
+        title: 'Risk-Based Thinking (Pemikiran Berbasis Risiko)',
+        citation: 'Ikhtiar dkk., 2023; Kamusoko, 2020',
+        definition: 'Pendekatan preventif dalam standar ISO 9001:2015 untuk mengidentifikasi potensi hambatan, ancaman, dan risiko operasional sebelum kendala tersebut benar-benar terjadi (Ikhtiar dkk., 2023).',
+        context: 'Membantu pimpinan madrasah memetakan risiko penurunan santri, keterbatasan dana, atau kehilangan dokumen penting agar disiapkan mitigasi sejak awal (Kamusoko, 2020; Ikhtiar dkk., 2023).',
+        reference: 'Rujukan: Ikhtiar, Orgianus, & Bachtiar (2023); Kamusoko (2020)'
+      },
+      'ADLI': {
+        title: 'Dimensi ADLI (Malcolm Baldrige)',
+        citation: 'Fauzi, 2021; Badri dkk., 2006',
+        definition: 'Kerangka evaluasi kematangan proses institusi yang mencakup Approach (desain metode), Deployment (penerapan unit), Learning (siklus evaluasi), dan Integration (keselarasan visi) (Fauzi, 2021; Badri dkk., 2006).',
+        context: 'Digunakan oleh perguruan tinggi Islam untuk memastikan program strategis kampus telah dijalankan secara terpadu di setiap fakultas dan tidak berhenti di meja birokrasi (Fauzi, 2021).',
+        reference: 'Rujukan: Fauzi (2021); Badri dkk. (2006)'
+      },
+      'LeTCI': {
+        title: 'Dimensi LeTCI (Malcolm Baldrige)',
+        citation: 'Fauzi, 2021; Sibel, 2018',
+        definition: 'Kerangka evaluasi hasil kinerja organisasi yang menelaah Levels (tingkat capaian), Trends (arah perkembangan), Comparisons (pembandingan mitra), dan Integration (relevansi sasaran) (Fauzi, 2021).',
+        context: 'Mencegah institusi berpuas diri hanya dengan melihat satu angka kelulusan sesaat tanpa menimbang tren historis dan perbandingan dengan institusi mitra (Sibel, 2018; Fauzi, 2021).',
+        reference: 'Rujukan: Fauzi (2021); Sibel (2018)'
+      },
+      'Gap Analysis': {
+        title: 'Gap Analysis (Analisis Kesenjangan)',
+        citation: 'Ikhtiar dkk., 2023; Irwanto dkk., 2023',
+        definition: 'Metode penilaian untuk membandingkan kondisi riil operasional lembaga saat ini dengan standar ideal mutu yang hendak dicapai (Ikhtiar dkk., 2023).',
+        context: 'Langkah awal yang bijak bagi madrasah agar dapat memprioritaskan pembenahan proses mana yang paling mendesak sesuai kapasitas dana yang dimiliki (Irwanto dkk., 2023; Ikhtiar dkk., 2023).',
+        reference: 'Rujukan: Ikhtiar dkk. (2023); Irwanto dkk. (2023)'
+      },
+      'Keadilan Institusional': {
+        title: 'Keadilan Institusional',
+        citation: 'Hamka, 1984; Shihab, 2012',
+        definition: 'Prinsip tata kelola berkeadilan dalam Islam yang mewajibkan aturan jelas, perlakuan transparan, nondiskriminatif, dan alokasi sumber daya yang proporsional (Hamka, 1984).',
+        context: 'Menjamin hak seluruh sivitas madrasah terpenuhi secara bermartabat dan menghindarkan manajemen dari favouritisme personal (Hamka, 1984, QS. An-Nahl: 90).',
+        reference: 'Rujukan: Hamka (1984, Tafsir Al-Azhar); Shihab (2012)'
+      }
+    };
+
+    function openTerm(key) {
+      soundModal();
+      const item = glossaryData[key];
+      if (item) {
+        document.getElementById('termTitle').innerText = item.title;
+        document.getElementById('termCitationBadge').innerText = item.citation;
+        document.getElementById('termDefinition').innerText = item.definition;
+        document.getElementById('termContext').innerText = item.context;
+        document.getElementById('termFullReference').innerText = item.reference;
+        const modal = document.getElementById('termModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+    }
+
+    function closeTerm() {
+      soundClick();
+      const modal = document.getElementById('termModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    const speakerScripts = {
+      1: `
+        <div class="space-y-3">
+          <div class="text-[11px] font-mono text-emerald-400 uppercase font-semibold">Slide 1: Pembukaan Metode S.O.C.I.A.L Fery Irwandi</div>
+          <p><strong class="text-white">Story:</strong> Beberapa waktu lalu, saya berdiskusi panjang dengan seorang pengelola madrasah tua di Jawa Barat. Madrasah ini pernah mencapai masa keemasan yang luar biasa saat dipimpin oleh seorang kiai kharismatik pendiri pondok. Namun bencana kelembagaan terjadi ketika sang kiai berpulang. Madrasah tersebut seketika kehilangan arah, arsip tata kelola tercecer di lemari pribadi, kurikulum mandek, dan jumlah pendaftar santri baru merosot hingga enam puluh persen dalam kurun waktu kurang dari tiga tahun.</p>
+          <p><strong class="text-white">Observation:</strong> Ketika kita mengamati lanskap pendidikan Islam hari ini, fenomena tragis ini bukanlah insiden tunggal yang berdiri sendiri. Begitu banyak madrasah, pesantren, bahkan perguruan tinggi Islam yang hidup dan bernapas semata-mata karena karisma personal satu orang figur sentral, bukan ditopang oleh keandalan sistem manajemen yang kokoh, melembaga, dan partisipatif.</p>
+          <p><strong class="text-white">Connection:</strong> Inilah kegelisahan eksistensial terbesar pendidikan Islam modern. Kita memiliki limpahan nilai spiritual dan moral yang luhur, tetapi sering kali tertinggal jauh dalam menyajikan tata kelola yang profesional, transparan, terukur, dan akuntabel. Nilai keikhlasan yang agung kerap disalahpahami sebagai pembenaran atas ketidaktertiban administrasi dan ketiadaan standar mutu.</p>
+          <p><strong class="text-white">Insight:</strong> Kajian literatur terkini, termasuk penelitian Sonia tahun 2021 dan Makbuloh tahun 2022, membuktikan secara empiris bahwa hegemoni patrimonial membuat proses akreditasi mutu hanya dipandang sebagai beban seremonial pengumpulan tumpukan berkas formulir kertas belaka. Lembaga sibuk memoles angka di atas kertas, namun kualitas proses belajar mengajar dan pembinaan adab santri di ruang kelas tidak pernah mengalami transformasi substantif.</p>
+          <p><strong class="text-white">Agenda:</strong> Dalam pemaparan ilmiah hari ini, kami bertiga akan membedah secara komparatif dan kritis empat model manajemen mutu terkemuka di dunia: Total Quality Management (TQM), Total Quality Education (TQE), Sistem Standar ISO 9001:2015, dan Malcolm Baldrige Performance Excellence Framework, serta bagaimana menyelaraskan instrumen global tersebut dengan nafas nilai teologis Ihsan dan Itqan.</p>
+          <p><strong class="text-white">Lo-fane dan Impact:</strong> Mengapa Bapak dan Ibu sekalian harus peduli dengan kajian ini? Karena masa depan peradaban Islam bergantung pada keandalan institusi pendidikannya. Jika kita mampu menyatukan kemuliaan adab dengan presisi sistem mutu modern, madrasah dan kampus Islam tidak hanya akan melahirkan lulusan yang bertakwa, tetapi juga tampil sebagai episentrum keunggulan peradaban yang memimpin di panggung dunia tanpa kehilangan secuil pun jati diri keislamannya.</p>
+        </div>
+      `,
+      2: `
+        <div class="space-y-3">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase font-semibold">Slide 2: Identitas Penelitian dan Sintesis Integratif</div>
+          <p><strong class="text-white">Orasi Slide 2:</strong> Assalamu alaikum warahmatullahi wabarakatuh. Selamat pagi dan salam sejahtera bagi kita semua. Pada kesempatan terhormat ini, kami memaparkan artikel penelitian konseptual kami berjudul Model-Model MMT dalam Pendidikan: TQM, TQE, ISO 9000, Malcolm Baldrige, yang disusun oleh tim peneliti Fakultas Tarbiyah dan Keguruan UIN Sunan Gunung Djati Bandung: Akbar Tausiur Rido, Muhammad Salman Alfarisi, dan Iman Firmansyah.</p>
+          <p>Kajian ini dilatarbelakangi oleh kenyataan bahwa diskursus manajemen mutu di lembaga pendidikan Islam kerap kali terbelah menjadi dua kutub ekstrem yang keliru. Kutub pertama menolak instrumen manajemen modern karena dianggap sebagai produk sekularisasi Barat yang berlawanan dengan tradisi ibadah ikhlas. Kutub kedua mengadopsi instrumen mutu modern secara membabi buta dan mekanis, sehingga mereduksi madrasah menjadi pabrik industri yang memperlakukan murid layaknya produk komoditas komersial.</p>
+          <p>Melalui pendekatan kualitatif-konseptual dengan telaah kepustakaan kritis merujuk pada karya fundamental Supriyanto tahun 1999, Nasution tahun 2000, Ross tahun 2017, serta Edward Sallis tahun 2010, artikel ini hadir untuk menjembatani jurang tersebut. Kami menawarkan sintesis integratif: bagaimana instrumen penjaminan mutu kelas dunia dapat diintegrasikan secara organik dengan nilai-nilai luhur pendidikan Islam guna mewujudkan tata kelola yang terukur, partisipatif, dan berkeadaban.</p>
+        </div>
+      `,
+      3: `
+        <div class="space-y-3">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase font-semibold">Slide 3: Dekonstruksi Paradoks Tata Kelola Madrasah</div>
+          <p><strong class="text-white">Orasi Slide 3:</strong> Bapak Ibu dewan penguji dan rekan-rekan akademisi sekalian, mari kita buka bedah ilmiah ini dengan menelaah The Burning Platform, yaitu tiga krisis sosiologis yang tengah menjebak institusi pendidikan Islam kita saat ini.</p>
+          <p>Krisis pertama adalah jebakan patrimonial-feodal, sebagaimana ditegaskan dalam kajian Sonia tahun 2021. Pola kepemimpinan madrasah sering kali terkonsentrasi secara mutlak pada satu individu kharismatik. Ketika keputusan strategis, alokasi dana, hingga kebijakan akademik hanya bergantung pada selera personal satu figur tanpa sistem delegasi terstruktur, organisasi menjadi sangat rapuh. Regenerasi kepemimpinan mandek, dan staf pengajar kehilangan daya inisiatif karena terbiasa menunggu titah atasan.</p>
+          <p>Krisis kedua adalah stigma sekuler yang masih bercokol di benak sebagian warga madrasah, sebagaimana dilaporkan Septiardilla dkk. tahun 2026. Muncul resistensi kultural bahwa penerapan indikator kinerja, audit mutu, dan SOP ketat adalah bentuk pengebirian nilai keikhlasan ibadah. Kekhawatiran ini muncul akibat kegagalan komunikasi pimpinan dalam menerjemahkan bahasa manajemen ke dalam bahasa kearifan lokal.</p>
+          <p>Krisis ketiga adalah ritual administratif semu atau formalisme akreditasi. Penjaminan mutu tereduksi menjadi sekadar ajang pengumpulan tumpukan berkas formulir kertas demi meraih status akreditasi formal di dinding. Begitu asesor pergi, praktik pembelajaran di kelas kembali ke cara-cara usang tanpa evaluasi bermakna. Oleh karena itu, arah transformasi kita harus bergeser dari hegemoni personal tak terukur menuju sistem mutu partisipatif yang akuntabel secara ilahiah dan profesional.</p>
+        </div>
+      `,
+      4: `
+        <div class="space-y-3">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase font-semibold">Slide 4: Fondasi Teologis dan Budaya Mutu Islam</div>
+          <p><strong class="text-white">Orasi Slide 4:</strong> Sebelum kita melangkah ke rincian instrumen teknis manajemen modern, kita harus menegaskan landasan filosofis paling mendasar: Manajemen mutu sesungguhnya bukan barang asing bagi Islam. Islam telah meletakkan pilar mutu berabad-abad sebelum Deming dan Juran merumuskan teorinya di Barat.</p>
+          <p>Pilar pertama adalah prinsip Ihsan, yang berakar pada Surat Al-Mulk ayat 2. Sebagaimana dijelaskan secara mendalam oleh Profesor Quraish Shihab dalam Tafsir Al-Misbah tahun 2012 serta diperkuat oleh Makbuloh tahun 2022, frasa Ahsanu Amala menuntut amal yang paling baik, yaitu perbuatan yang dilakukan dengan niat paling ikhlas dan metode kerja yang paling tepat. Dalam madrasah, Ihsan adalah dorongan spiritual internal pendidik untuk memberikan pelayanan pengajaran terbaik melampaui batas kewajiban standar minimum.</p>
+          <p>Pilar kedua adalah prinsip Itqan, merujuk pada Surat At-Tawbah ayat 105 dan hadits Nabi saw. mengenai profesionalisme kerja. Itqan adalah ketelitian, kecermatan, kemantapan, dan ketuntasan dalam bekerja di bawah kesadaran pengawasan ganda: pengawasan batiniah Allah Swt. dan mekanisme audit institusi. Ditopang pilar Keadilan Institusi dalam Surat An-Nahl ayat 90 (Tafsir Al-Azhar Hamka, 1984) serta semangat pembaruan sistemik dalam Surat Ar-Ra d ayat 11, perbaikan mutu pada hakikatnya adalah ibadah kelembagaan nyata demi kemaslahatan umat.</p>
+        </div>
+      `,
+      5: `
+        <div class="space-y-3">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase font-semibold">Slide 5: Model Total Quality Management (TQM)</div>
+          <p><strong class="text-white">Orasi Slide 5:</strong> Sekarang mari kita masuk ke model manajemen pertama: Total Quality Management (TQM). TQM bukan sekadar kumpulan perkakas manajerial, melainkan sebuah transformasi filosofis budaya organisasi secara menyeluruh, sebagaimana dirumuskan oleh W. Edwards Deming dan Joseph M. Juran (Ross, 2017; Nasution, 2000).</p>
+          <p>Dari pemikiran Deming (Marshall dkk., 2004), pelajaran terpenting bagi madrasah adalah prinsip Keteguhan Tujuan dan Menghilangkan Rasa Takut di ruang kerja guru (Drive out fear). Guru dan staf harus merasa aman secara psikologis untuk menyampaikan kendala belajar murid dan kegagalan proses tanpa rasa takut ditegur atau dihukum. Bila ruang kerja diliputi ketakutan, laporan yang sampai ke meja pimpinan hanyalah data manis palsu yang menutupi kebobrokan riil.</p>
+          <p>Sementara itu, melalui Trilogi Juran (Januariani & Akhyak, 2024), TQM menyediakan siklus perencanaan mutu, pengendalian supervisi jujur, dan pelatihan peningkatan kompetensi berkelanjutan. Pendekatan ini dipadukan dengan filosofi Kaizen (Hastuti dkk., 2025), yaitu perbaikan kecil harian yang konsisten melibatkan seluruh staf. Dalam khazanah Islam, Kaizen berpadu serasi dengan semangat Islah (Yulianto, 2020), di mana setiap warga madrasah memuliakan murid sebagai subjek pembelajar yang berhak atas perkembangan akhlak dan intelektual seutuhnya.</p>
+        </div>
+      `,
+      6: `
+        <div class="space-y-3">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase font-semibold">Slide 6: Model Total Quality Education (TQE) Edward Sallis</div>
+          <p><strong class="text-white">Orasi Slide 6:</strong> Model kedua yang kami bedah adalah Total Quality Education (TQE) yang dikonseptualisasikan oleh Edward Sallis pada tahun 2010. Gagasan Sallis sangat krusial bagi madrasah karena beliau mengingatkan bahwa sekolah bukanlah pabrik industri yang mencetak mur dan baut seragam. Objek pendidikan adalah manusia berjiwa yang memiliki latar belakang, bakat, keunikan, dan potensi spiritual yang beragam.</p>
+          <p>Sallis membagi mutu ke dalam dua dimensi yang saling menyempurnakan: Hard Quality dan Soft Quality (Crawford & Shutler, 1999; Saifulloh dkk., 2012). Hard Quality mencakup indikator fisik dan kuantitatif terukur, seperti kelengkapan sarana IT, rasio kelulusan, dan pemenuhan dokumen kurikulum. Ini adalah prasyarat dasar kepatuhan formal kelembagaan.</p>
+          <p>Namun, jantung sesungguhnya dari pendidikan Islam berada pada Soft Quality. Dimensi ini menelaah kualitas relasi interpersonal antara guru dan murid, kehangatan empati, rasa aman dari perundungan, keteladanan akhlak, serta pembiasaan ibadah yang bermakna dan tidak sekadar rutinitas buta (Supriyanto, 1999). Madrasah yang hanya mengejar Hard Quality berisiko melahirkan lulusan berotak cerdas tetapi hampa adab. Keseimbangan kedua dimensi inilah yang menjadi poros pedagogis sejati dalam TQE.</p>
+        </div>
+      `,
+      7: `
+        <div class="space-y-3">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase font-semibold">Slide 7: Sistem Manajemen Mutu ISO 9001:2015</div>
+          <p><strong class="text-white">Orasi Slide 7:</strong> Budaya mutu yang hangat dan manusiawi membutuhkan penopang prosedural agar tidak runtuh ketika terjadi pergantian kepemimpinan. Di sinilah letak relevansi strategis Sistem Manajemen Mutu ISO 9001:2015 (Ikhtiar dkk., 2023; Isnaini dkk., 2020).</p>
+          <p>ISO 9001 menyumbangkan tiga instrumen fundamental bagi madrasah. Pertama, siklus PDCA (Plan, Do, Check, Act) yang menjamin setiap program direncanakan dengan indikator jelas, dieksekusi dengan pembagian peran terstruktur, diaudit secara objektif tanpa kultur mencari kambing hitam, dan ditindaklanjuti dengan tindakan korektif preventif (Fernández-Cruz dkk., 2019).</p>
+          <p>Kedua, instrumen Risk-Based Thinking (RBT). Manajemen madrasah diajak berpikir preventif: memetakan potensi risiko penurunan jumlah santri, kekeringan kas operasional, atau kerentanan arsip digital sebelum krisis benar-benar meledak (Kamusoko, 2020). Ketiga, Memori Kelembagaan melalui pengendalian informasi terdokumentasi, sehingga tata kelola tetap berjalan mulus melintasi suksesi pimpinan yayasan. Namun kami mengingatkan keras: implementasi ISO harus terbebas dari birokratisasi kertas (Seruni dkk., 2025); SOP harus mempermudah guru mendampingi murid, bukan menyita jam belajar di kelas.</p>
+        </div>
+      `,
+      8: `
+        <div class="space-y-3">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase font-semibold">Slide 8: Malcolm Baldrige Criteria for Performance Excellence</div>
+          <p><strong class="text-white">Orasi Slide 8:</strong> Ketika madrasah bertransformasi menjadi institut atau universitas Islam bertaraf global, instrumen evaluasi yang dibutuhkan meluas dari kepatuhan prosedur operasional menuju diagnosis kinerja organisasi secara komprehensif. Kerangka Malcolm Baldrige menyediakan instrumen tersebut (Badri dkk., 2006; Kumar dkk., 2020; Fauzi, 2021).</p>
+          <p>Baldrige menilai keterpaduan tujuh kategori sistemik: kepemimpinan visioner, perencanaan strategis, fokus mahasiswa, manajemen data pengetahuan, kesiapan tenaga kerja dosen-staf, manajemen proses operasi, hingga hasil organisasi nyata. Mutu proses diukur melalui metodologi ADLI: Approach (ketepatan desain metode), Deployment (keluasan penerapan di seluruh fakultas), Learning (siklus evaluasi berbasis fakta), dan Integration (keselarasan proses dengan visi misi universitas).</p>
+          <p>Sementara itu, mutu hasil capaian diuji secara ketat melalui dimensi LeTCI: Levels (tingkat capaian aktual), Trends (arah grafik kinerja lintas tahun), Comparisons (pembandingan objektif dengan perguruan tinggi mitra internasional), dan Integration (relevansi hasil terhadap sasaran strategis) (Fauzi, 2021; Sibel, 2018). Pendekatan ini mencegah perguruan tinggi Islam berpuas diri hanya dengan selembar angka kelulusan sesaat.</p>
+        </div>
+      `,
+      9: `
+        <div class="space-y-3">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase font-semibold">Slide 9: Analisis Komparatif dan Integrasi Model</div>
+          <p><strong class="text-white">Orasi Slide 9:</strong> Bapak Ibu sekalian, sampailah kita pada intisari sintesis artikel ilmiah kami. Keempat model manajemen mutu ini bukanlah pilihan alternatif yang saling meniadakan atau bersaing satu sama lain, melainkan pilar-pilar yang saling menyempurnakan ke dalam satu ekosistem kelembagaan utuh (Irwanto dkk., 2023).</p>
+          <p>TQM menyediakan pondasi budaya keterlibatan dan komitmen dialogis dari pimpinan puncak hingga staf terdepan. TQE bertindak sebagai jangkar pedagogis dan adab yang memastikan orientasi kemanusiaan dan akhlak murid tetap menjadi tujuan utama. ISO 9001 menghadirkan disiplin prosedur operasional, kejelasan alur kerja SOP, dan mitigasi risiko kelembagaan. Dan Malcolm Baldrige memandu audit komprehensif untuk menguji hubungan kausal antara kematangan proses dengan capaian hasil jangka panjang.</p>
+          <p>Integrasi simultan keempat model ini memampukan madrasah dan perguruan tinggi Islam melompati pemenuhan delapan Standar Nasional Pendidikan (SNP) sebagai prasyarat minimum (Ristianah & Ma sum, 2022), menuju rekognisi keunggulan bersaing global (Hart & Rodgers, 2023) tanpa mencederai keluhuran nilai teologis Islam.</p>
+        </div>
+      `,
+      10: `
+        <div class="space-y-3">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase font-semibold">Slide 10: Anatomi Tantangan Implementasi di Lapangan</div>
+          <p><strong class="text-white">Orasi Slide 10:</strong> Sebagai peneliti yang berpijak pada realitas, kami tidak ingin terjebak pada utopia teoritis di atas kertas. Kita wajib membedah secara jujur empat tantangan struktural dan kultural nyata yang membentang di lapangan pendidikan Islam (Azizah dkk., 2025).</p>
+          <p>Tantangan pertama adalah resistensi budaya feodal dan kecurigaan teologis yang belum tuntas, di mana kritik konstruktif guru masih sering disalahartikan sebagai bentuk pembangkangan terhadap pimpinan (Sonia, 2021). Tantangan kedua adalah kelelahan administratif staf pengajar akibat beban formulir pelaporan yang menumpuk tanpa disertai pelatihan bermakna tentang hakikat perbaikan proses belajar (Irwanto dkk., 2023).</p>
+          <p>Tantangan ketiga adalah keterbatasan fiskal dan ketidakstabilan dana operasional. Lembaga yang hidup dari infak atau SPP minim sering kali terpaksa mengorbankan anggaran pelatihan guru demi menutup kebutuhan fisik harian (Maqbool, 2023). Dan tantangan keempat adalah kerapuhan tata kelola data digital; data akademik tercecer di komputer personal staf atau buku manual usang, sehingga analisis riwayat mutu jangka panjang menjadi mustahil dilakukan (Salsabila, 2025). Mengabaikan keempat kendala ini hanya akan menjadikan implementasi mutu berujung pada kejenuhan massal.</p>
+        </div>
+      `,
+      11: `
+        <div class="space-y-3">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase font-semibold">Slide 11: Peta Jalan Solusi Strategis Berkelanjutan</div>
+          <p><strong class="text-white">Orasi Slide 11:</strong> Menjawab anatomi masalah tersebut, kami merumuskan peta jalan solusi praktis dan berkeadilan melalui tiga tahapan taktis.</p>
+          <p>Langkah pertama adalah kepemimpinan dialogis yang menyatukan bahasa manajerial dengan nilai amanah dan Itqan (Makbuloh, 2022). Pimpinan madrasah harus turun merangkul guru melalui forum bedah kasus berkala, menjelaskan bahwa evaluasi mutu bukanlah ancaman pemotongan honor, melainkan sarana pengabdian profesional yang bermartabat demi masa depan santri (Fatmawaty dkk., 2024).</p>
+          <p>Langkah kedua adalah implementasi bertahap melalui Gap Analysis (Ikhtiar dkk., 2023). Madrasah tidak perlu langsung mendaftar sertifikasi internasional berbiaya mahal. Mulailah dengan menata proses layanan yang paling mendesak, mengujicobanya pada skala kecil, lalu memperluas sistem secara terukur sesuai kapasitas fiskal lembaga. Langkah ketiga adalah digitalisasi basis data terpadu (Wardhani dkk., 2024), merapikan format pencatatan agar keputusan strategis madrasah berpijak pada data empiris yang valid, transparan, dan terlindungi.</p>
+        </div>
+      `,
+      12: `
+        <div class="space-y-3">
+          <div class="text-[11px] font-mono text-zinc-400 uppercase font-semibold">Slide 12: Simpulan dan Sintesis Peradaban</div>
+          <p><strong class="text-white">Orasi Slide 12:</strong> Sebagai penutup pemaparan ilmiah kami hari ini, mari kita hayati bersama sebuah sintesis penutup: Mutu dalam pendidikan Islam bukanlah selembar piagam akreditasi di dinding kantor pimpinan, dan bukan pula sekadar deretan angka statistik evaluasi.</p>
+          <p>Mutu sejati adalah amanah peradaban. Keberhasilan manajemen mutu terwujud manakala ketelitian instrumen TQM, kehangatan jiwa TQE, kepatuhan prosedur ISO 9001, serta keluasan diagnosis Malcolm Baldrige berpadu harmonis dengan kesucian niat Ihsan dan ketelitian kerja Itqan (Makbuloh, 2022; Sallis, 2010; Shihab, 2012).</p>
+          <p>Ketika kita merapikan tata kelola madrasah dan kampus Islam dengan penuh tanggung jawab profesional dan spiritual, kita sedang membentangkan sayap peradaban untuk mengantarkan anak-anak kita menjadi generasi yang tangguh secara intelektual, unggul secara kepemimpinan, dan berakar kokoh pada keluhuran akhlak mulia. Terima kasih atas perhatian Bapak Ibu sekalian. Wassalamu alaikum warahmatullahi wabarakatuh.</p>
+        </div>
+      `
+    };
+
+    function updateSpeakerContent() {
+      const container = document.getElementById('speakerContent');
+      if (container) {
+        container.innerHTML = speakerScripts[currentSlide] || `<p>Naskah terangkum dalam alur presentasi.</p>`;
+      }
+    }
+
+    function toggleSpeakerNotes() {
+      soundClick();
+      const drawer = document.getElementById('speakerDrawer');
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        drawer.classList.add('flex');
+      } else {
+        drawer.classList.add('hidden');
+        drawer.classList.remove('flex');
+      }
+    }
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'n' || e.key === 'N') {
+        toggleSpeakerNotes();
+        return;
+      }
+
+      if (e.key === 'Escape') {
+        closeTerm();
+        const drawer = document.getElementById('speakerDrawer');
+        if (!drawer.classList.contains('hidden')) {
+          drawer.classList.add('hidden');
+          drawer.classList.remove('flex');
+        }
+        return;
+      }
+
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'Backspace') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullscreen();
+      } else if (e.key === 'm' || e.key === 'M') {
+        toggleAudio();
+      }
+    });
+
+    let scene, camera, renderer, buildingGroup, aircraftGroup;
+    let isDragging = false;
+    let previousMousePosition = { x: 0 };
+    let dragVelocity = 0;
+    let planeOrbitAngle = 0;
+
+    function initThreeScene() {
+      const container = document.getElementById('threeCanvasContainer');
+      if (!container) return;
+
+      const width = container.clientWidth || 450;
+      const height = container.clientHeight || 260;
+
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+      camera.position.set(0, 14, 40);
+      camera.lookAt(0, 2, 0);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.95);
+      scene.add(ambientLight);
+
+      const dirLight = new THREE.DirectionalLight(0xffffff, 1.3);
+      dirLight.position.set(20, 40, 20);
+      scene.add(dirLight);
+
+      // Building Group
+      buildingGroup = new THREE.Group();
+
+      const baseGeo = new THREE.CylinderGeometry(8, 9, 1.5, 32);
+      const baseMat = new THREE.MeshStandardMaterial({ color: 0x1f1f23, roughness: 0.5, metalness: 0.5 });
+      const baseMesh = new THREE.Mesh(baseGeo, baseMat);
+      baseMesh.position.y = -4;
+      buildingGroup.add(baseMesh);
+
+      const towerGeo = new THREE.BoxGeometry(6.5, 14, 6.5);
+      const towerMat = new THREE.MeshStandardMaterial({ color: 0x27272a, roughness: 0.3, metalness: 0.7 });
+      const towerMesh = new THREE.Mesh(towerGeo, towerMat);
+      towerMesh.position.y = 3;
+      buildingGroup.add(towerMesh);
+
+      const glassGeo = new THREE.BoxGeometry(6.7, 11, 5);
+      const glassMat = new THREE.MeshStandardMaterial({ color: 0x52525b, roughness: 0.1, metalness: 0.9, transparent: true, opacity: 0.8 });
+      const glassMesh = new THREE.Mesh(glassGeo, glassMat);
+      glassMesh.position.y = 3;
+      buildingGroup.add(glassMesh);
+
+      const roofGeo = new THREE.ConeGeometry(3.5, 4.5, 4);
+      const roofMat = new THREE.MeshStandardMaterial({ color: 0xd4d4d8, roughness: 0.2, metalness: 0.8 });
+      const roofMesh = new THREE.Mesh(roofGeo, roofMat);
+      roofMesh.position.y = 12.25;
+      roofMesh.rotation.y = Math.PI / 4;
+      buildingGroup.add(roofMesh);
+
+      scene.add(buildingGroup);
+
+      // Orbit Path Ring
+      const orbitCurve = new THREE.EllipseCurve(0, 0, 15, 15, 0, 2 * Math.PI, false, 0);
+      const points = orbitCurve.getPoints(64);
+      const orbitGeo = new THREE.BufferGeometry().setFromPoints(points);
+      const orbitMat = new THREE.LineBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.25 });
+      const orbitLine = new THREE.Line(orbitGeo, orbitMat);
+      orbitLine.rotation.x = Math.PI / 2.3;
+      orbitLine.position.y = 3.5;
+      scene.add(orbitLine);
+
+      // Aircraft Model
+      aircraftGroup = new THREE.Group();
+      
+      const fuselageGeo = new THREE.ConeGeometry(0.5, 3.2, 8);
+      const jetMat = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.2, metalness: 0.8 });
+      const fuselage = new THREE.Mesh(fuselageGeo, jetMat);
+      fuselage.rotation.x = Math.PI / 2;
+      aircraftGroup.add(fuselage);
+
+      const wingShape = new THREE.Shape();
+      wingShape.moveTo(0, 0.5);
+      wingShape.lineTo(2.8, -1.2);
+      wingShape.lineTo(0, -0.6);
+      wingShape.lineTo(-2.8, -1.2);
+      wingShape.closePath();
+      const extrudeSettings = { depth: 0.08, bevelEnabled: false };
+      const wingGeo = new THREE.ExtrudeGeometry(wingShape, extrudeSettings);
+      const wing = new THREE.Mesh(wingGeo, jetMat);
+      wing.rotation.x = Math.PI / 2;
+      wing.position.y = 0.1;
+      aircraftGroup.add(wing);
+
+      const finGeo = new THREE.BoxGeometry(0.08, 0.8, 0.8);
+      const fin = new THREE.Mesh(finGeo, jetMat);
+      fin.position.set(0, 0.5, -1.1);
+      aircraftGroup.add(fin);
+
+      scene.add(aircraftGroup);
+
+      // Mouse and Touch Drag Event Handlers
+      const canvasEl = renderer.domElement;
+
+      canvasEl.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        previousMousePosition = { x: e.clientX };
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - previousMousePosition.x;
+        previousMousePosition = { x: e.clientX };
+        dragVelocity = deltaX * 0.007;
+        soundRotate();
+      });
+
+      canvasEl.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          previousMousePosition = { x: e.touches[0].clientX };
+        }
+      });
+
+      window.addEventListener('touchend', () => {
+        isDragging = false;
+      });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+        const deltaX = e.touches[0].clientX - previousMousePosition.x;
+        previousMousePosition = { x: e.touches[0].clientX };
+        dragVelocity = deltaX * 0.007;
+        soundRotate();
+      });
+
+      window.addEventListener('resize', () => {
+        if (!container || !renderer || !camera) return;
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+        renderer.setSize(w, h);
+      });
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      if (buildingGroup && aircraftGroup) {
+        if (!isDragging) {
+          buildingGroup.rotation.y += 0.004;
+          // Continuously orbits in the OPPOSITE direction
+          planeOrbitAngle -= 0.012;
+        } else {
+          buildingGroup.rotation.y += dragVelocity;
+          // Inverse orbit acceleration relative to building rotation velocity
+          planeOrbitAngle -= (dragVelocity * 2.2 + 0.01);
+          dragVelocity *= 0.92;
+        }
+
+        const radius = 15;
+        const orbitTilt = Math.PI / 2.3;
+        const px = Math.cos(planeOrbitAngle) * radius;
+        const pz = Math.sin(planeOrbitAngle) * radius * Math.cos(orbitTilt);
+        const py = 3.5 + Math.sin(planeOrbitAngle) * radius * Math.sin(orbitTilt);
+
+        aircraftGroup.position.set(px, py, pz);
+
+        const lookAngle = planeOrbitAngle - Math.PI / 2;
+        const lx = px - Math.sin(planeOrbitAngle);
+        const lz = pz + Math.cos(planeOrbitAngle) * Math.cos(orbitTilt);
+        const ly = py + Math.cos(planeOrbitAngle) * Math.sin(orbitTilt);
+        aircraftGroup.lookAt(lx, ly, lz);
+      }
+
+      if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+      }
+    }
+
+    window.onload = function () {
+      initThreeScene();
+      animate();
+      updateSlideDisplay('forward');
+      lucide.createIcons();
+    };
+  </script>
+</body>
+</html>
